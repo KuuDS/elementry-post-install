@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "Updating System & Apps"
+apt-get update
+apt-get -y upgrade
+
+echo "Enabeling PPA"
+apt-get install -y software-properties-common
+
+echo "Enabeling Elementry Tweaks"
+add-apt-repository -y ppa:philip.scott/elementary-tweaks
+apt-get update
+apt-get install -y elementary-tweaks
+
+echo "Installing New Apps"
+apt-get install -y gdebi firefox transmission kupfer gparted tlp tlp-rdw vlc
+
+echo "Removing Unused Apps"
+apt-get remove -y epiphany epiphany-browser snap-photobooth maya-calendar audience noise pantheon-mail pantheon-photos pantheon-calculator cheese-common simple-scan pantheon-photos
+
+echo "Disabeling Guest Account"
+echo "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf 
+
+echo "Cleaning Up"
+apt-get -y autoremove
+
+
